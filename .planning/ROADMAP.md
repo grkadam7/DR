@@ -41,8 +41,8 @@ This roadmap takes the project from the raw problem statement and IO-VNBD datase
 3. Butterworth / notch digital filter removes high-frequency engine harmonics and pothole shocks.
 4. ZUPT (Zero Velocity Update) detects complete vehicle stops and zeroes out velocity accumulation.
 **Plans**: 2 plans
-- [ ] 02-01: Auto-alignment calibration module rotating sensor frame to vehicle frame (Forward, Lateral, Up).
-- [ ] 02-02: Vibration band-stop filter and ZUPT/ZARU stop detector.
+- [x] 02-01: Auto-alignment calibration module rotating sensor frame to vehicle frame (Forward, Lateral, Up).
+- [x] 02-02: Vibration band-stop filter and ZUPT/ZARU stop detector.
 
 ### Phase 3: AI/ML Speed & Kinematic Estimation
 **Goal**: Overcome absence of OBD-II speedometer by training deep learning models to predict forward speed directly from IMU signals.  
@@ -124,8 +124,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Dataset Pipeline & Baseline INS | 0/2 | Not started | - |
-| 2. In-Vehicle Alignment & Preprocessing | 0/2 | Not started | - |
+| 1. Dataset Pipeline & Baseline INS | 2/2 | ✅ Complete | 2026-09-10 |
+| 2. In-Vehicle Alignment & Preprocessing | 2/2 | ✅ Complete | 2026-09-10 |
 | 3. AI/ML Speed & Kinematic Estimation | 0/2 | Not started | - |
 | 4. NHC & Offline Map-Matching | 0/2 | Not started | - |
 | 5. GNSS+INS Fusion & Blackout Handler | 0/2 | Not started | - |

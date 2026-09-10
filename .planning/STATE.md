@@ -3,10 +3,10 @@ gsd_state_version: '1.0'
 status: ready_to_plan
 progress:
   total_phases: 8
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 14
-  completed_plans: 2
-  percent: 14
+  completed_plans: 4
+  percent: 28
 ---
 
 # Project State
@@ -16,14 +16,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-09-10)
 
 **Core value:** Restrict positional drift to <10% of total distance during GNSS outages using low-cost smartphone MEMS IMUs without OBD-II feeds, ensuring uninterrupted lane-level navigation.  
-**Current focus:** Phase 2: In-Vehicle Alignment & Preprocessing
+**Current focus:** Phase 3: AI/ML Speed & Kinematic Estimation
 
 ## Current Position
 
-Phase: 2 of 8 (In-Vehicle Alignment & Preprocessing)  
+Phase: 3 of 8 (AI/ML Speed & Kinematic Estimation)  
 Plan: 0 of 2 in current phase  
 Status: Ready to plan  
-Last activity: 2026-09-10 — Completed Phase 1 (IO-VNBD dataset pipeline, WGS84-ENU transform, baseline INS simulation, trajectory visualizer, verified on real S-S1.csv data).
+Last activity: 2026-09-10 — Completed Phase 2 (auto-leveling, forward axis alignment, Butterworth vibration filter, Hampel pothole spike clamp, ZUPT/ZARU detector, CalibratedDeadReckoning pipeline). 14/14 tests green.
 
 Progress: [█░░░░░░░░░] 14%
 
@@ -39,7 +39,7 @@ Progress: [█░░░░░░░░░] 14%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Dataset Pipeline & Baseline INS | 2/2 | Completed | 15 min |
-| 2. In-Vehicle Alignment & Preprocessing | 0/2 | - | - |
+| 2. In-Vehicle Alignment & Preprocessing | 2/2 | Completed | 10 min |
 | 3. AI/ML Speed & Kinematic Estimation | 0/2 | - | - |
 | 4. NHC & Offline Map-Matching | 0/2 | - | - |
 | 5. GNSS+INS Fusion & Blackout Handler | 0/2 | - | - |
