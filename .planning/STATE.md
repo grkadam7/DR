@@ -3,10 +3,10 @@ gsd_state_version: '1.0'
 status: ready_to_plan
 progress:
   total_phases: 8
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 14
-  completed_plans: 4
-  percent: 28
+  completed_plans: 6
+  percent: 43
 ---
 
 # Project State
@@ -16,14 +16,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-09-10)
 
 **Core value:** Restrict positional drift to <10% of total distance during GNSS outages using low-cost smartphone MEMS IMUs without OBD-II feeds, ensuring uninterrupted lane-level navigation.  
-**Current focus:** Phase 3: AI/ML Speed & Kinematic Estimation
+**Current focus:** Phase 4: NHC & Offline Map-Matching
 
 ## Current Position
 
-Phase: 3 of 8 (AI/ML Speed & Kinematic Estimation)  
+Phase: 4 of 8 (NHC & Offline Map-Matching)  
 Plan: 0 of 2 in current phase  
 Status: Ready to plan  
-Last activity: 2026-09-10 — Completed Phase 2 (auto-leveling, forward axis alignment, Butterworth vibration filter, Hampel pothole spike clamp, ZUPT/ZARU detector, CalibratedDeadReckoning pipeline). 14/14 tests green.
+Last activity: 2026-09-10 — Completed Phase 3 (SpeedNet CNN-GRU model, training loop w/ early stopping, ONNX export, ONNXRuntime inference engine + latency benchmark). 26/26 tests green.
 
 Progress: [█░░░░░░░░░] 14%
 
@@ -40,7 +40,7 @@ Progress: [█░░░░░░░░░] 14%
 |-------|-------|-------|----------|
 | 1. Dataset Pipeline & Baseline INS | 2/2 | Completed | 15 min |
 | 2. In-Vehicle Alignment & Preprocessing | 2/2 | Completed | 10 min |
-| 3. AI/ML Speed & Kinematic Estimation | 0/2 | - | - |
+| 3. AI/ML Speed & Kinematic Estimation | 2/2 | Completed | 12 min |
 | 4. NHC & Offline Map-Matching | 0/2 | - | - |
 | 5. GNSS+INS Fusion & Blackout Handler | 0/2 | - | - |
 | 6. Edge Core Engine | 0/1 | - | - |

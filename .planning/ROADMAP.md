@@ -53,8 +53,8 @@ This roadmap takes the project from the raw problem statement and IO-VNBD datase
 2. Forward speed prediction achieves RMSE $< 1.5$ m/s compared to ground truth vehicle speed.
 3. Model exported to lightweight ONNX format with inference latency $< 20$ ms.
 **Plans**: 2 plans
-- [ ] 03-01: Model architecture design, training loop, and hyperparameter tuning on IO-VNBD splits.
-- [ ] 03-02: ONNX model quantization, inference engine, and velocity evaluation.
+- [x] 03-01: Model architecture design, training loop, and hyperparameter tuning on IO-VNBD splits.
+- [x] 03-02: ONNX model quantization, inference engine, and velocity evaluation.
 
 ### Phase 4: Non-Holonomic Constraints & Offline Map-Matching
 **Goal**: Enforce vehicle kinematic boundaries and snap drifting coordinates onto offline road networks.  
@@ -126,7 +126,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 |-------|----------------|--------|-----------|
 | 1. Dataset Pipeline & Baseline INS | 2/2 | ✅ Complete | 2026-09-10 |
 | 2. In-Vehicle Alignment & Preprocessing | 2/2 | ✅ Complete | 2026-09-10 |
-| 3. AI/ML Speed & Kinematic Estimation | 0/2 | Not started | - |
+| 3. AI/ML Speed & Kinematic Estimation | 2/2 | ✅ Complete | 2026-09-10 |
 | 4. NHC & Offline Map-Matching | 0/2 | Not started | - |
 | 5. GNSS+INS Fusion & Blackout Handler | 0/2 | Not started | - |
 | 6. Edge Core Engine | 0/1 | Not started | - |
