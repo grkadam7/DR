@@ -66,7 +66,7 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| EVAL-01, EVAL-02 | Phase 1 | Pending |
+| EVAL-01, EVAL-02 | Phase 1 | Completed |
 | ALIGN-01, ALIGN-02, ALIGN-03 | Phase 2 | Pending |
 | FILTER-01, FILTER-02 | Phase 2 | Pending |
 | SPEED-01, SPEED-02, SPEED-03 | Phase 3 | Pending |

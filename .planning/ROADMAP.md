@@ -6,14 +6,14 @@ This roadmap takes the project from the raw problem statement and IO-VNBD datase
 
 ## Phases
 
-- [ ] **Phase 1: Dataset Pipeline & Baseline INS Dead Reckoning** - Ingest IO-VNBD dataset, establish ground truth trajectory visualizer, and build baseline unassisted double-integration INS dead reckoning to measure raw drift.
+- [x] **Phase 1: Dataset Pipeline & Baseline INS Dead Reckoning** - Ingest IO-VNBD dataset, establish ground truth trajectory visualizer, and build baseline unassisted double-integration INS dead reckoning to measure raw drift.
 - [ ] **Phase 2: In-Vehicle Alignment & Signal Preprocessing** - Implement automatic gravity-based pitch/roll leveling, forward yaw axis alignment, Butterworth vibration filtering, and ZUPT/ZARU zero-velocity detectors.
 - [ ] **Phase 3: AI/ML Speed & Kinematic Estimation** - Build and train deep-learning models (1D CNN/GRU/TCN) to estimate vehicle forward speed from windowed IMU vibrations without OBD-II feeds, and export to ONNX.
 - [ ] **Phase 4: Non-Holonomic Constraints & Offline Map-Matching** - Implement Non-Holonomic Constraints (NHC) and an offline road-snapping / HMM map matcher using OpenStreetMap road link geometries.
 - [ ] **Phase 5: GNSS+INS Fusion & Instant Blackout Handler** - Build Extended/Unscented Kalman Filter fusing GNSS + IMU with sub-50ms outage transition to AI-Dead Reckoning and smooth reconvergence upon GNSS recovery.
 - [ ] **Phase 6: High-Frequency Edge Core Engine** - Package the complete IDR-INS core into an edge-deployable modular engine supporting up to 200 Hz for high-grade/FOG external IMUs.
 - [ ] **Phase 7: Mobile Navigation Application** - Develop a cross-platform mobile navigation client (10 Hz) featuring offline map rendering, smooth vehicle tracking cursor, and real-time navigation status indicators.
-- [ ] **Phase 8: SIH Benchmark Evaluation & Screening Deliverables** - Generate quantitative benchmark metrics, trajectory plots (Ground Truth vs Raw vs IDR), and proposal artifacts demonstrating $<10\%$ drift for SIH screening.
+- [ ] **Phase 8: SIH Benchmark Deliverables** - Generate quantitative benchmark metrics, trajectory plots (Ground Truth vs Raw vs IDR), and proposal artifacts demonstrating $<10\%$ drift for SIH screening.
 
 ---
 
@@ -28,8 +28,8 @@ This roadmap takes the project from the raw problem statement and IO-VNBD datase
 2. 2D/3D trajectory plotting script visualizes ground truth vehicle routes.
 3. Baseline pure mathematical INS dead reckoning runs on sample runs and quantifies the baseline drift error.
 **Plans**: 2 plans
-- [ ] 01-01: Dataset pipeline and preprocessing script for IO-VNBD benchmark runs.
-- [ ] 01-02: Ground truth visualizer and baseline unconstrained INS dead reckoning simulation.
+- [x] 01-01: Dataset pipeline and preprocessing script for IO-VNBD benchmark runs.
+- [x] 01-02: Ground truth visualizer and baseline unconstrained INS dead reckoning simulation.
 
 ### Phase 2: In-Vehicle Alignment & Signal Preprocessing
 **Goal**: Solve smartphone mounting orientation variability and filter chassis vibration/potholes.  

@@ -35,6 +35,7 @@ yarn-error.log*
 # Datasets & Weights (large binary files)
 data/raw/
 data/cache/
+data/iovnbd/
 *.onnx.temp
 *.pth
 *.pt
