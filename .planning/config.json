@@ -1,0 +1,21 @@
+{
+  "model_profile": "balanced",
+  "commit_docs": true,
+  "parallelization": true,
+  "search_gitignored": false,
+  "context_window": 200000,
+  "phase_naming": "sequential",
+  "mode": "interactive",
+  "git": {
+    "branching_strategy": "none",
+    "create_tag": true
+  },
+  "workflow": {
+    "research": true,
+    "plan_check": true,
+    "verifier": true,
+    "nyquist_validation": true,
+    "ai_integration_phase": true,
+    "code_review": true
+  }
+}
