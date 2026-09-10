@@ -1,0 +1,9 @@
+{
+  "name": "GNSS+IMU Intelligent Dead Reckoning",
+  "short_name": "GNSS+IMU DR",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#050b14",
+  "theme_color": "#07111f",
+  "orientation": "portrait"
+}
