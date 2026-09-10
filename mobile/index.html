@@ -10,37 +10,13 @@
 </head>
 <body>
   <main class="app">
-    <header class="topbar">
-      <div><div class="eyebrow">GNSS + IMU</div><h1>Intelligent Dead Reckoning</h1></div>
-      <span id="modeBadge" class="badge gnss">GNSS AIDED</span>
-    </header>
-
-    <section class="map-card">
-      <canvas id="map" aria-label="Navigation map"></canvas>
-      <div class="map-overlay"><span id="fixText">GNSS FIX</span><span id="satText">SAT 18</span></div>
-    </section>
-
-    <section class="stats">
-      <article><span>Speed</span><strong id="speed">0.0</strong><small>km/h</small></article>
-      <article><span>Heading</span><strong id="heading">0</strong><small>°</small></article>
-      <article><span>Distance</span><strong id="distance">0</strong><small>m</small></article>
-      <article><span>DR drift</span><strong id="drift">0.0</strong><small>m</small></article>
-    </section>
-
-    <section class="status-card">
-      <div class="status-row"><span>IMU</span><b id="imuStatus">● ONLINE</b></div>
-      <div class="status-row"><span>AI speed estimator</span><b id="aiStatus">● READY</b></div>
-      <div class="status-row"><span>Vehicle alignment</span><b id="alignStatus">● CALIBRATED</b></div>
-      <div class="status-row"><span>Map matching</span><b id="mapStatus">● ACTIVE</b></div>
-    </section>
-
-    <div class="controls">
-      <button id="startBtn" class="primary">START DEMO</button>
-      <button id="outageBtn" class="danger">SIMULATE GNSS OUTAGE</button>
-      <button id="resetBtn" class="secondary">RESET</button>
-    </div>
+    <header class="topbar"><div><div class="eyebrow">GNSS + IMU</div><h1>Intelligent Dead Reckoning</h1></div><span id="modeBadge" class="badge gnss">GNSS AIDED</span></header>
+    <section class="map-card"><canvas id="map" aria-label="Navigation map"></canvas><div class="map-overlay"><span id="fixText">GNSS FIX</span><span id="satText">SAT 18</span></div></section>
+    <section class="stats"><article><span>Speed</span><strong id="speed">0.0</strong><small>km/h</small></article><article><span>Heading</span><strong id="heading">0</strong><small>°</small></article><article><span>Distance</span><strong id="distance">0</strong><small>m</small></article><article><span>DR drift</span><strong id="drift">0.0</strong><small>m</small></article></section>
+    <section class="status-card"><div class="status-row"><span>IMU</span><b>● ONLINE</b></div><div class="status-row"><span>AI speed estimator</span><b>● READY</b></div><div class="status-row"><span>Vehicle alignment</span><b>● CALIBRATED</b></div><div class="status-row"><span>Map matching</span><b>● ACTIVE</b></div></section>
+    <div class="controls"><button id="startBtn" class="primary">START DEMO</button><button id="outageBtn" class="danger">SIMULATE GNSS OUTAGE</button><button id="resetBtn" class="secondary">RESET</button></div>
     <p id="message" class="message">Ready. Start the replay to simulate vehicle navigation.</p>
   </main>
-  <script src="app.js"></script>
+  <script src="demo_data.js"></script><script src="app.js"></script>
 </body>
 </html>
