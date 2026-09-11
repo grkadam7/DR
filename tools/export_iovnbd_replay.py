@@ -1,15 +1,14 @@
 """Export an IO-VNBD smartphone CSV into browser replay data.
 
 Usage:
-    python tools/export_iovnbd_replay.py \
-        --smartphone S-S2.csv \
-        --output mobile/demo_data.js
+    python tools/export_iovnbd_replay.py --smartphone S-S2.csv --output mobile/demo_data.js
 
-This keeps the raw IO-VNBD files out of the repository. The generated JS is
-small enough for the mobile MVP and contains only timestamp, GNSS position,
-speed and course. During an outage the browser uses speed + heading as a
-replay dead-reckoning proxy; it is intentionally NOT presented as the final
-IMU DR engine.
+Raw CSV files stay out of the repository. DATE is preferred over TIME SINCE
+START because some recordings reset the latter mid-run.
+
+The generated replay is a browser demonstration format. During a simulated
+GNSS outage the UI propagates speed + heading; this is a proxy until the
+mobile app is connected directly to the IMU DR engine.
 """
 
 from __future__ import annotations
@@ -24,9 +23,8 @@ import pandas as pd
 
 
 def clean(name: str) -> str:
-    name = name.strip()
-    name = re.sub(r"[\\r\\n\\t]", "", name)
-    return re.sub(r"\\s+", " ", name)
+    name = re.sub(r"[\r\n\t]", "", str(name).strip())
+    return re.sub(r"\s+", " ", name)
 
 
 def find_col(columns, pattern: str) -> str:
@@ -42,10 +40,8 @@ def main() -> None:
     parser.add_argument("--smartphone", required=True, help="IO-VNBD smartphone CSV")
     parser.add_argument("--output", default="mobile/demo_data.js")
     parser.add_argument(
-        "--speed-scale",
-        type=float,
-        default=3.6,
-        help="Multiply CSV GPS SPEED by this factor before converting km/h to m/s; 3.6 matches the observed IO-VNBD Android speed encoding.",
+        "--speed-scale", type=float, default=3.6,
+        help="Scale raw GPS SPEED before converting to m/s. Default 3.6 matches the observed IO-VNBD Android encoding.",
     )
     parser.add_argument("--max-points", type=int, default=2500)
     args = parser.parse_args()
@@ -53,12 +49,11 @@ def main() -> None:
     df = pd.read_csv(args.smartphone, skipinitialspace=True, encoding="latin1")
     df.columns = [clean(c) for c in df.columns]
 
-    lat = find_col(df.columns, r"gps latitude")
-    lon = find_col(df.columns, r"gps longitude")
-    speed = find_col(df.columns, r"gps speed")
-    heading = find_col(df.columns, r"gps orientation|gps heading")
+    lat_col = find_col(df.columns, r"gps latitude")
+    lon_col = find_col(df.columns, r"gps longitude")
+    speed_col = find_col(df.columns, r"gps speed")
+    heading_col = find_col(df.columns, r"gps orientation|gps heading")
 
-    # DATE is preferred because some IO-VNBD recordings reset TIME SINCE START.
     date_col = next((c for c in df.columns if c.upper() == "DATE"), None)
     time_col = next((c for c in df.columns if re.search(r"time since start", c, re.I)), None)
 
@@ -71,51 +66,40 @@ def main() -> None:
     else:
         raise KeyError("IO-VNBD file has neither DATE nor TIME SINCE START")
 
-    out = pd.DataFrame(
-        {
-            "t": elapsed,
-            "lat": pd.to_numeric(df[lat], errors="coerce"),
-            "lon": pd.to_numeric(df[lon], errors="coerce"),
-            "speed": pd.to_numeric(df[speed], errors="coerce") * args.speed_scale / 3.6,
-            "heading": pd.to_numeric(df[heading], errors="coerce"),
-        }
-    ).dropna()
+    out = pd.DataFrame({
+        "t": elapsed,
+        "lat": pd.to_numeric(df[lat_col], errors="coerce"),
+        "lon": pd.to_numeric(df[lon_col], errors="coerce"),
+        "speed": pd.to_numeric(df[speed_col], errors="coerce") * args.speed_scale / 3.6,
+        "heading": pd.to_numeric(df[heading_col], errors="coerce"),
+    }).dropna()
 
-    # Remove duplicate/non-monotonic timestamps and impossible GPS fixes.
-    out = out[(out["lat"].between(-90, 90)) & (out["lon"].between(-180, 180))]
-    out = out.sort_values("t").drop_duplicates("t")
+    out = out[
+        out["lat"].between(-90, 90) & out["lon"].between(-180, 180) & (out["t"] >= 0)
+    ].sort_values("t").drop_duplicates("t")
 
     if len(out) > args.max_points:
         idx = np.linspace(0, len(out) - 1, args.max_points).round().astype(int)
         out = out.iloc[np.unique(idx)]
 
-    records = []
-    for row in out.itertuples(index=False):
-        records.append(
-            {
-                "t": round(float(row.t), 3),
-                "lat": round(float(row.lat), 8),
-                "lon": round(float(row.lon), 8),
-                "speed": round(max(0.0, float(row.speed)), 3),
-                "heading": round(float(row.heading) % 360.0, 2),
-            }
-        )
-
-    payload = {
-        "source": "IO-VNBD smartphone replay",
-        "speed_unit": "m/s",
-        "heading_unit": "deg, clockwise from north",
-        "note": "Replay proxy: GNSS speed/course are propagated during simulated outage. Final app must replace this with the IMU DR engine.",
-        "points": records,
-    }
+    records = [
+        {
+            "t": round(float(r.t), 3),
+            "lat": round(float(r.lat), 8),
+            "lon": round(float(r.lon), 8),
+            "speedMps": round(max(0.0, float(r.speed)), 3),
+            "speedKmh": round(max(0.0, float(r.speed)) * 3.6, 2),
+            "headingDeg": round(float(r.heading) % 360.0, 2),
+        }
+        for r in out.itertuples(index=False)
+    ]
 
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(
         "// Generated by tools/export_iovnbd_replay.py; do not edit manually.\n"
-        "window.DEMO_TRAJECTORY = "
-        + json.dumps(payload, separators=(",", ":"))
-        + ";\n",
+        "window.DEMO_TRAJECTORY = " + json.dumps(records, separators=(",", ":")) + ";\n"
+        "window.REPLAY_SOURCE = 'IO-VNBD';\n",
         encoding="utf-8",
     )
     print(f"Wrote {len(records)} replay points to {output}")
